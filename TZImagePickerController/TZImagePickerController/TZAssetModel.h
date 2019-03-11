@@ -49,3 +49,13 @@ typedef enum : NSUInteger {
 - (void)setResult:(PHFetchResult *)result needFetchAssets:(BOOL)needFetchAssets;
 
 @end
+
+
+@interface SGTPreviewAssetModel : NSObject
+
+@property(nonatomic, copy) NSString *imgURLStr;
+@property(nonatomic, strong) UIImage *image;
+
+- (instancetype)initWithImage:(UIImage *)image imgURLStr:(NSString *)urlStr;
+
+@end

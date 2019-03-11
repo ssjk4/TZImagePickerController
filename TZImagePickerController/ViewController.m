@@ -208,21 +208,28 @@
             vc.model = model;
             [self presentViewController:vc animated:YES completion:nil];
         } else { // preview photos / 预览照片
-            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithSelectedAssets:_selectedAssets selectedPhotos:_selectedPhotos index:indexPath.item];
-            imagePickerVc.maxImagesCount = self.maxCountTF.text.integerValue;
-            imagePickerVc.allowPickingGif = self.allowPickingGifSwitch.isOn;
-            imagePickerVc.allowPickingOriginalPhoto = self.allowPickingOriginalPhotoSwitch.isOn;
-            imagePickerVc.allowPickingMultipleVideo = self.allowPickingMuitlpleVideoSwitch.isOn;
-            imagePickerVc.showSelectedIndex = self.showSelectedIndexSwitch.isOn;
-            imagePickerVc.isSelectOriginalPhoto = _isSelectOriginalPhoto;
-            [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
-                self->_selectedPhotos = [NSMutableArray arrayWithArray:photos];
-                self->_selectedAssets = [NSMutableArray arrayWithArray:assets];
-                self->_isSelectOriginalPhoto = isSelectOriginalPhoto;
-                [self->_collectionView reloadData];
-                self->_collectionView.contentSize = CGSizeMake(0, ((self->_selectedPhotos.count + 2) / 3 ) * (self->_margin + self->_itemWH));
-            }];
-            [self presentViewController:imagePickerVc animated:YES completion:nil];
+//            TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithSelectedAssets:_selectedAssets selectedPhotos:_selectedPhotos index:indexPath.item];
+//            imagePickerVc.maxImagesCount = self.maxCountTF.text.integerValue;
+//            imagePickerVc.allowPickingGif = self.allowPickingGifSwitch.isOn;
+//            imagePickerVc.allowPickingOriginalPhoto = self.allowPickingOriginalPhotoSwitch.isOn;
+//            imagePickerVc.allowPickingMultipleVideo = self.allowPickingMuitlpleVideoSwitch.isOn;
+//            imagePickerVc.showSelectedIndex = self.showSelectedIndexSwitch.isOn;
+//            imagePickerVc.isSelectOriginalPhoto = _isSelectOriginalPhoto;
+//            [imagePickerVc setDidFinishPickingPhotosHandle:^(NSArray<UIImage *> *photos, NSArray *assets, BOOL isSelectOriginalPhoto) {
+//                self->_selectedPhotos = [NSMutableArray arrayWithArray:photos];
+//                self->_selectedAssets = [NSMutableArray arrayWithArray:assets];
+//                self->_isSelectOriginalPhoto = isSelectOriginalPhoto;
+//                [self->_collectionView reloadData];
+//                self->_collectionView.contentSize = CGSizeMake(0, ((self->_selectedPhotos.count + 2) / 3 ) * (self->_margin + self->_itemWH));
+//            }];
+//            [self presentViewController:imagePickerVc animated:YES completion:nil];
+            
+            
+            SGTPreviewAssetModel *m = [[SGTPreviewAssetModel alloc] initWithImage:nil imgURLStr:@"http://b.hiphotos.baidu.com/image/pic/item/11385343fbf2b2114a65cd70c48065380cd78e41.jpg"];
+            SGTPreviewAssetModel *m1 = [[SGTPreviewAssetModel alloc] initWithImage:nil imgURLStr:@"http://g.hiphotos.baidu.com/image/pic/item/902397dda144ad34ff330bb9dea20cf431ad8504.jpg"];
+            
+            TZImagePickerController *imagePickerVC = [[TZImagePickerController alloc] initWithPreviewAssetModels:@[m, m1] index:indexPath.item];
+            [self presentViewController:imagePickerVC animated:YES completion:nil];
         }
     }
 }

@@ -71,3 +71,17 @@
 }
 
 @end
+
+
+@implementation SGTPreviewAssetModel
+
+- (instancetype)initWithImage:(UIImage *)image imgURLStr:(NSString *)urlStr {
+    self = [super init];
+    if (self) {
+        _image = image;
+        _imgURLStr = urlStr;
+    }
+    return self;
+}
+
+@end

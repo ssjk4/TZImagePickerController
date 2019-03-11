@@ -14,6 +14,7 @@
 #import "TZImageCropManager.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import "TZImagePickerController.h"
+#import <UIImageView+WebCache.h>
 
 @implementation TZAssetPreviewCell
 
@@ -67,6 +68,11 @@
 - (void)setModel:(TZAssetModel *)model {
     [super setModel:model];
     _previewView.asset = model.asset;
+}
+
+- (void)setPreviewAssetModel:(SGTPreviewAssetModel *)previewAssetModel {
+    [super setPreviewAssetModel:previewAssetModel];
+    _previewView.previewAssetModel = previewAssetModel;
 }
 
 - (void)recoverSubviews {
@@ -145,6 +151,19 @@
     _progressView = [[TZProgressView alloc] init];
     _progressView.hidden = YES;
     [self addSubview:_progressView];
+}
+
+- (void)setPreviewAssetModel:(SGTPreviewAssetModel *)previewAssetModel {
+    _previewAssetModel = previewAssetModel;
+    if (previewAssetModel.image) {
+        self.imageView.image = previewAssetModel.image;
+    } else if (previewAssetModel.imgURLStr.length > 0) {
+        [self.imageView sd_setImageWithURL:[NSURL URLWithString:previewAssetModel.imgURLStr] placeholderImage:nil options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
+            
+        } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
+            [self resizeSubviews];
+        }];
+    }
 }
 
 - (void)setModel:(TZAssetModel *)model {

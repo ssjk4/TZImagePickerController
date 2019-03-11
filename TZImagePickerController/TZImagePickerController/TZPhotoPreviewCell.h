@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@class TZAssetModel;
+@class TZAssetModel, SGTPreviewAssetModel;
 @interface TZAssetPreviewCell : UICollectionViewCell
 @property (nonatomic, strong) TZAssetModel *model;
+@property (nonatomic, strong) SGTPreviewAssetModel *previewAssetModel;
 @property (nonatomic, copy) void (^singleTapGestureBlock)(void);
 - (void)configSubviews;
 - (void)photoPreviewCollectionViewDidScroll;
@@ -41,6 +42,7 @@
 @property (nonatomic, assign) BOOL allowCrop;
 @property (nonatomic, assign) CGRect cropRect;
 
+@property (nonatomic, strong) SGTPreviewAssetModel *previewAssetModel;
 @property (nonatomic, strong) TZAssetModel *model;
 @property (nonatomic, strong) id asset;
 @property (nonatomic, copy) void (^singleTapGestureBlock)(void);
