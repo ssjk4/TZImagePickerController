@@ -502,6 +502,12 @@
         SGTPreviewAssetModel *model = _models[indexPath.item];
         cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"TZPhotoPreviewCell" forIndexPath:indexPath];
         cell.previewAssetModel = model;
+        [(TZPhotoPreviewCell *)cell setImageProgressUpdateBlock:^(double progress) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [_tzImagePickerVc hideProgressHUD];
+                [_tzImagePickerVc showProgressHUD];
+            });
+        }];
     } else {
         TZAssetModel *model = _models[indexPath.item];
         

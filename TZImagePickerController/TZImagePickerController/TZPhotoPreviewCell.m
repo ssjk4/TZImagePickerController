@@ -158,8 +158,11 @@
     if (previewAssetModel.image) {
         self.imageView.image = previewAssetModel.image;
     } else if (previewAssetModel.imgURLStr.length > 0) {
+        __weak __typeof(self)weakSelf = self;
         [self.imageView sd_setImageWithURL:[NSURL URLWithString:previewAssetModel.imgURLStr] placeholderImage:nil options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize, NSURL * _Nullable targetURL) {
-            
+            if (weakSelf.imageProgressUpdateBlock) {
+                weakSelf.imageProgressUpdateBlock(receivedSize/expectedSize);
+            }
         } completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
             [self resizeSubviews];
         }];

@@ -225,7 +225,7 @@
 //            [self presentViewController:imagePickerVc animated:YES completion:nil];
             
             
-            SGTPreviewAssetModel *m = [[SGTPreviewAssetModel alloc] initWithImage:nil imgURLStr:@"http://b.hiphotos.baidu.com/image/pic/item/11385343fbf2b2114a65cd70c48065380cd78e41.jpg"];
+            SGTPreviewAssetModel *m = [[SGTPreviewAssetModel alloc] initWithImage:nil imgURLStr:@"https://b-ssl.duitang.com/uploads/item/201505/23/20150523151314_if3et.jpeg"];
             SGTPreviewAssetModel *m1 = [[SGTPreviewAssetModel alloc] initWithImage:nil imgURLStr:@"http://g.hiphotos.baidu.com/image/pic/item/902397dda144ad34ff330bb9dea20cf431ad8504.jpg"];
             
             TZImagePickerController *imagePickerVC = [[TZImagePickerController alloc] initWithPreviewAssetModels:@[m, m1] index:indexPath.item];
